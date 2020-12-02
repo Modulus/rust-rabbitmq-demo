@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  rabbitmq:
+    image: rabbitmq:3.8.9-management
+    container_name: kanino
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SECRET"
+      RABBITMQ_DEFAULT_USER: "kanin"
+      RABBITMQ_DEFAULT_PASS: "kanin"
+    ports:
+      - 5672:5672
+      - 15672:15672
