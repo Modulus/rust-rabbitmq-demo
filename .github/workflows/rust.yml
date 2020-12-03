@@ -39,10 +39,10 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
       - name: Docker build sender container
-        run: docker build -t ghcr.io/modulus/rust-rabbitmq-demo-sender:latest --file Dockerfile_send
+        run: docker build -t ghcr.io/modulus/rust-rabbitmq-demo-sender:latest . --file Dockerfile_send
       - name: Docker push sender container
         run: docker push ghcr.io/modulus/rust-rabbitmq-demo-sender:latest
       - name: Docker build receiver container
-        run: docker build -t ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest --file Dockerfile_receive
+        run: docker build -t ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest . --file Dockerfile_receive
       - name: Docker push sender container
         run: docker push ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest
