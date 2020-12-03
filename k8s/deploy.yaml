@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sender
+spec:
+  selector:
+    matchLabels:
+      app: sender
+  template:
+    metadata:
+      labels:
+        app: sender
+    spec:
+      containers:
+      - name: sender
+        image: ghcr.io/modulus/rust-rabbitmq-demo-sender:latest
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: receiver
+spec:
+  selector:
+    matchLabels:
+      app: receiver
+  template:
+    metadata:
+      labels:
+        app: receiver
+    spec:
+      containers:
+      - name: receiver
+        image: rust-rabbitmq-demo-receiver:latest
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

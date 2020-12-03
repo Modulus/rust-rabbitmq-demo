@@ -2,9 +2,15 @@
 // in one shell, and run the hello_world_publish example in another.
 use amiquip::{Connection, ConsumerMessage, ConsumerOptions, QueueDeclareOptions, Result};
 
+use std::env;
+
 fn main() -> Result<()> {
+    let rabbitmq_url : String = env::var("RABBITMQ_CONNECTION_STRING").unwrap_or("amqp://kanin:kanin@localhost:5672".to_string());
+
+    println!("Connection rabbitmq on {:?}", rabbitmq_url);
+
     // Open connection.
-    let mut connection = Connection::insecure_open("amqp://kanin:kanin@localhost:5672")?;
+    let mut connection = Connection::insecure_open(&rabbitmq_url)?;
 
     // Open a channel - None says let the library choose the channel ID.
     let channel = connection.open_channel(None)?;

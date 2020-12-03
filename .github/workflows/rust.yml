@@ -46,5 +46,5 @@ jobs:
         run: docker push ghcr.io/modulus/rust-rabbitmq-demo-sender:latest
       - name: Docker build receiver container
         run: docker build -t ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest . --file Dockerfile_receive
-      - name: Docker push sender container
+      - name: Docker push receiver container
         run: docker push ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest
