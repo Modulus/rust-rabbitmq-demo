@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sender
+spec:
+  selector:
+    matchLabels:
+      app: sender
+  template:
+    metadata:
+      labels:
+        app: sender
+    spec:
+      containers:
+      - name: sender
+        image: ghcr.io/modulus/rust-rabbitmq-demo-sender:latest
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+          - name: RABBITMQ_CONNECTION_STRING
+            value: amqp://xToGAljdEtjGOouF7KVMKz0D3AdTioBe:mjyZfd_heus5lKyidKGoIGm5xK_T7jmX@test-cluster:5672
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: receiver
+spec:
+  selector:
+    matchLabels:
+      app: receiver
+  template:
+    metadata:
+      labels:
+        app: receiver
+    spec:
+      containers:
+      - name: receiver
+        image: ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+          - name: RABBITMQ_CONNECTION_STRING
+            value: amqp://xToGAljdEtjGOouF7KVMKz0D3AdTioBe:mjyZfd_heus5lKyidKGoIGm5xK_T7jmX@test-cluster:5672

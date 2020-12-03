@@ -1,0 +1,21 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: test-cluster
+  namespace: rabbit-demo
+  labels:
+    app: rabbitmq
+spec:
+  rabbitmq:
+    additionalPlugins:
+      - rabbitmq_prometheus
+  service:
+    type: ClusterIP
+  replicas: 3
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
