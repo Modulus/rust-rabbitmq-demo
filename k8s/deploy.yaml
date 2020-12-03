@@ -10,6 +10,7 @@ spec:
     metadata:
       labels:
         app: sender
+        purpose: demo
     spec:
       containers:
       - name: sender
@@ -37,6 +38,7 @@ spec:
     metadata:
       labels:
         app: receiver
+        purpose: demo
     spec:
       containers:
       - name: receiver
