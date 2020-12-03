@@ -25,6 +25,11 @@ kubectl get secret -n rabbit-demo test-cluster-default-user -o jsonpath="{.data.
 
 Read more here: https://github.com/prometheus-operator/kube-prometheus
 
+6. Deploy apps
+```
+kubectl apply -f k8s/app.yaml
+```
+
 # RabbitMQ Operator
 
 https://www.rabbitmq.com/kubernetes/operator/install-operator.html
