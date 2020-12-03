@@ -30,7 +30,7 @@ jobs:
 
   package:
     if:
-    needs: test
+    needs: Run tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
