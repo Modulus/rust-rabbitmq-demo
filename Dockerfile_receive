@@ -1,11 +1,15 @@
 FROM rust:1.48-buster as builder
 WORKDIR /opt/app
 COPY . /opt/app/
+RUN find / -xdev -perm /6000 -type -f exec chmod -as {} \; || true
+
 RUN ls -la /opt/app
 RUN apt update && apt install  build-essential -y
 RUN cargo build --release
 
+
 FROM ubuntu:20.04 as runner
+RUN find / -xdev -perm /6000 -type -f exec chmod -as {} \; || true
 WORKDIR /opt/app
 COPY --from=builder /opt/app/target/release/receiver /opt/app
 CMD /opt/app/receiver
