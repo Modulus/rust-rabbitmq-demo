@@ -25,12 +25,12 @@ jobs:
             ${{ runner.os }}-stable-cargo-registry-
       - name: Build
         run: cargo build --verbose
-      - name: Run tests
+      - name: Tests
         run: cargo test --verbose
 
   package:
     if:
-    needs: Run tests
+    needs: Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
