@@ -15,8 +15,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - uses: actions/checkout@v2
     - name: Build
       run: cargo build --verbose
     - name: Run tests
       run: cargo test --verbose
+
+  package:
+    if:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: login
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - name: Docker build sender container
+        run: docker build -t ghcr.io/modulus/rust-rabbitmq-demo-sender:latest --file Dockerfile_send
+      - name: Docker push sender container
+        run: docker push ghcr.io/modulus/rust-rabbitmq-demo-sender:latest
+      - name: Docker build receiver container
+        run: docker build -t ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest --file Dockerfile_receive
+      - name: Docker push sender container
+        run: docker push ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest

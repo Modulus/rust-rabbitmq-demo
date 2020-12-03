@@ -1,5 +1,8 @@
 version: "3.8"
 services:
+  sender:
+  recevier:
+    
   rabbitmq:
     image: rabbitmq:3.8.9-management
     container_name: kanino
