@@ -4,10 +4,22 @@ services:
 #    build:
 #      context: ./
 #      dockerfile: Dockerfile_send
+#    depends_on:
+#      - rabbitmq
 #  recevier:
 #    build:
 #      context: ./
 #      dockerfile: Dockerfile_receive
+#    depends_on:
+#      - rabbitmq
+  sender:
+    image: ghcr.io/modulus/rust-rabbitmq-demo-sender:latest
+    depends_on:
+      - rabbitmq
+  receiver:
+    image: rust-rabbitmq-demo-receiver:latest
+    depends_on:
+      - rabbitmq
   rabbitmq:
     image: rabbitmq:3.8.9-management
     container_name: kanino

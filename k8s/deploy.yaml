@@ -21,6 +21,9 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        env:
+          - name: RABBITMQ_CONNECTION_STRING
+            value: amqp://kanin:kanin@localhost:5672
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -45,3 +48,6 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        env:
+          - name: RABBITMQ_CONNECTION_STRING
+            value: amqp://kanin:kanin@localhost:5672
