@@ -16,10 +16,16 @@ services:
     image: ghcr.io/modulus/rust-rabbitmq-demo-sender:latest
     depends_on:
       - rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_CONNECTION_STRING: "amqp://kanin:kanin@kanino:5672"
   receiver:
-    image: rust-rabbitmq-demo-receiver:latest
+    image: ghcr.io/modulus/rust-rabbitmq-demo-receiver:latest
     depends_on:
       - rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_CONNECTION_STRING: "amqp://kanin:kanin@kanino:5672"
   rabbitmq:
     image: rabbitmq:3.8.9-management
     container_name: kanino
@@ -30,3 +36,4 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+    restart: always
