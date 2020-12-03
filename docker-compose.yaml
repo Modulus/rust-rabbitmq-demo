@@ -1,8 +1,13 @@
 version: "3.8"
 services:
   sender:
+    build:
+      context: ./
+      dockerfile: Dockerfile_send
   recevier:
-    
+    build:
+      context: ./
+      dockerfile: Dockerfile_receive
   rabbitmq:
     image: rabbitmq:3.8.9-management
     container_name: kanino
